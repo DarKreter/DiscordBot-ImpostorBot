@@ -86,6 +86,12 @@ async def on_voice_state_update(member, before, after):
     
     # If someone join channel (not change or deaf)
     if before.channel == None and after.channel != None:
+        
+        r = random.randint(1, 10) 
+        print("Selected number: {}".format(r))
+        if r != 10:
+            return
+        
         isConnected = True 
         
         print('-'*80)
