@@ -1,28 +1,30 @@
 import discord
-from unidecode import unidecode
+
 from TOKEN import TOKEN
 
-intents = discord.Intents.all()
-client = discord.Client(intents=intents)
-
-# from functions import *
+from client import client
+from functions import *
 # from globalVar import *
 
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+
+# Do przetestowania:
+
+# Wykrywanie, że ktoś dołączył na kanał głosowy
+# Pobieranie nicku osoby + avataru(?), którą bot będzie imitować
+# Spróbować zmienić nick i avatar bota
+# Dołączenie na kanał głosowy
+# Puszczenie mp3
 
 
+# Program:
 
+# Wykrycie, że ktoś dołączył
+# Losowanie czy też dołączyć
+# Jeśli tak to pobrać nick
+# Wylosować dźwięk odpowiedni dla danej osoby
+# Zagrać dźwięk
+# Wyjść
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    mess = unidecode(message.content)
-    
-    await message.channel.send(mess)
 
 
 client.run(TOKEN)
