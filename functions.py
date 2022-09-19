@@ -4,6 +4,8 @@ from time import sleep
 from client import client
 from globalVar import *
 import random
+from os import listdir
+from os.path import isfile, join
 
 async def ChangeUsernameAndAvatar(guildID, userID=None):
     guild = client.get_guild(guildID)
@@ -53,9 +55,17 @@ def DrawPerson(voiceChannel):
        
     # print(availableUsers)
        
-    userID = random.choice(list(availableUsers.values()))
-    return userID
+    user = random.choice(list(availableUsers.keys()))
+    return user
     
+    
+# draw sound based on drawed person
+def DrawSound(user):
+    path = "audio/{}/".format(user)
+    onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
+    sound = random.choice(onlyfiles)
+    
+    return("{}{}".format(path, sound))
     
 isConnected = False
 # Called when someone changes their voice state (connects to vc)
@@ -80,7 +90,7 @@ async def on_voice_state_update(member, before, after):
         
         # change nick and avatar
         drawedUser = DrawPerson(voiceChannel=after.channel)
-        await ChangeUsernameAndAvatar(guildID=guild.id, userID=drawedUser)
+        await ChangeUsernameAndAvatar(guildID=guild.id, userID=users[drawedUser])
         sleep(5)
         
         # join
@@ -88,10 +98,10 @@ async def on_voice_state_update(member, before, after):
         voiceConnection = await after.channel.connect() # connect
         
         # draw sentence
-        #
+        sound = DrawSound(drawedUser)
         
         # play it
-        source = discord.FFmpegPCMAudio("test.mp3") # Get audio file
+        source = discord.FFmpegPCMAudio(sound) # Get audio file
         voiceConnection.play(source) # play it
         
         # Wait until bot is playing

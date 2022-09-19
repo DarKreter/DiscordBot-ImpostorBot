@@ -21,7 +21,7 @@ from globalVar import *
 # Wykrycie, że ktoś dołączył [DONE]
 # Losowanie czy też dołączyć 
 # Jeśli tak to pobrać nick [DONE]
-# Wylosować dźwięk odpowiedni dla danej osoby
+# Wylosować dźwięk odpowiedni dla danej osoby [DONE]
 # Zagrać dźwięk [DONE]
 # Wyjść [DONE]
 
