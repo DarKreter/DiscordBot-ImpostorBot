@@ -18,12 +18,12 @@ from globalVar import *
 
 # Program:
 
-# Wykrycie, że ktoś dołączył
-# Losowanie czy też dołączyć
-# Jeśli tak to pobrać nick
+# Wykrycie, że ktoś dołączył [DONE]
+# Losowanie czy też dołączyć 
+# Jeśli tak to pobrać nick [DONE]
 # Wylosować dźwięk odpowiedni dla danej osoby
-# Zagrać dźwięk
-# Wyjść
+# Zagrać dźwięk [DONE]
+# Wyjść [DONE]
 
 
 client.run(TOKEN)
