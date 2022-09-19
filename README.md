@@ -1,3 +1,3 @@
-sudo apt install $(cat aptReq.txt)
+sudo apt install $(cat requirements/apt.txt)
 
-pip3 install -r pipReq.txt
+pip3 install -r requirements/pip.txt
