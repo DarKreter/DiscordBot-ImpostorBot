@@ -19,7 +19,10 @@ async def ChangeUsernameAndAvatar(guildID, userID=None):
         
         fp = open(filename, 'rb')
         pfp = fp.read()
-        # await client.user.edit(avatar=pfp)
+        try:
+            await client.user.edit(avatar=pfp)
+        except discord.errors.HTTPException:
+            print("too fast avatar")
         
     else:
         # Change username based on userID, and guildID
@@ -29,13 +32,16 @@ async def ChangeUsernameAndAvatar(guildID, userID=None):
         
         # Save profile picture to file
         filename = "images/temp.jpg"
-        await user.avatar_url.save(filename)
+        await user.avatar.save(filename)
         file = discord.File(fp=filename)
         
         # Change profile picture from file
         fp = open(filename, 'rb')
         pfp = fp.read()
-        # await client.user.edit(avatar=pfp)
+        try:
+            await client.user.edit(avatar=pfp)
+        except discord.errors.HTTPException:
+            print("too fast avatar")
      
 # Called when bot is ready 
 @client.event
@@ -87,10 +93,10 @@ async def on_voice_state_update(member, before, after):
     # If someone join channel (not change or deaf)
     if before.channel == None and after.channel != None:
         
-        r = random.randint(1, 10) 
-        print("Selected number: {}".format(r))
-        if r != 10:
-            return
+        # r = random.randint(1, 10) 
+        # print("Selected number: {}".format(r))
+        # if r != 10:
+        #     return
         
         isConnected = True 
         
