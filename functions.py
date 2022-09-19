@@ -4,6 +4,40 @@ from time import sleep
 from client import client
 from globalVar import *
 
+
+async def ChangeUsernameAndAvatar(guildID, user=None):
+    guild = client.get_guild(guildID)
+    myself  = discord.utils.get(guild.members, id=BOTanID)
+    if user == None:
+        # Change back to BOTan
+        
+        await myself.edit(nick=None)
+        
+        filename = "images/BOTan_avatar.jpg"
+        
+        fp = open(filename, 'rb')
+        pfp = fp.read()
+        await client.user.edit(avatar=pfp)
+        
+    else:
+        # Change username based on userID, and guildID
+        user    = discord.utils.get(guild.members, id=users[user])
+        
+        print(user.display_name)
+        
+        await myself.edit(nick=user.display_name)
+        
+        # Save profile picture to file
+        filename = "images/temp.jpg"
+        await user.avatar_url.save(filename)
+        file = discord.File(fp=filename)
+        
+        # Change profile picture from file
+        fp = open(filename, 'rb')
+        pfp = fp.read()
+        await client.user.edit(avatar=pfp)
+     
+
 # Called when bot is ready 
 @client.event
 async def on_ready():
@@ -11,15 +45,9 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     
     
-# Called whenever message is send on any channel
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+    # await ChangeUsernameAndAvatar(guildID=972274726456131594)
+    # await ChangeUsernameAndAvatar(guildID=972274726456131594, user="Daniel")
 
-    mess = unidecode(message.content)
-    
-    await message.channel.send(mess)
     
 # Called when someone changes their voice state (connects to vc)
 @client.event

@@ -10,8 +10,8 @@ from globalVar import *
 # Do przetestowania:
 
 # Wykrywanie, że ktoś dołączył na kanał głosowy [DONE]
-# Pobieranie nicku osoby + avataru(?), którą bot będzie imitować
-# Spróbować zmienić nick i avatar bota
+# Pobieranie nicku osoby + avataru(?), którą bot będzie imitować [DONE]
+# Spróbować zmienić nick i avatar bota [DONE]
 # Dołączenie na kanał głosowy [DONE]
 # Puszczenie mp3 [DONE]
 
