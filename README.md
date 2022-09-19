@@ -1,3 +1,3 @@
-sudo apt install python3 python3-pip
+sudo apt install $(cat aptReq.txt)
 
-pip3 install -r requirements.txt
+pip3 install -r pipReq.txt
