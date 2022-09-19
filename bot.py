@@ -4,7 +4,7 @@ from TOKEN import TOKEN
 
 from client import client
 from functions import *
-# from globalVar import *
+from globalVar import *
 
 
 # Do przetestowania:
@@ -12,7 +12,7 @@ from functions import *
 # Wykrywanie, że ktoś dołączył na kanał głosowy [DONE]
 # Pobieranie nicku osoby + avataru(?), którą bot będzie imitować
 # Spróbować zmienić nick i avatar bota
-# Dołączenie na kanał głosowy
+# Dołączenie na kanał głosowy [DONE]
 # Puszczenie mp3
 
 
@@ -24,7 +24,6 @@ from functions import *
 # Wylosować dźwięk odpowiedni dla danej osoby
 # Zagrać dźwięk
 # Wyjść
-
 
 
 client.run(TOKEN)
