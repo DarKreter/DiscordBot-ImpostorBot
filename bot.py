@@ -13,7 +13,7 @@ from globalVar import *
 # Pobieranie nicku osoby + avataru(?), którą bot będzie imitować
 # Spróbować zmienić nick i avatar bota
 # Dołączenie na kanał głosowy [DONE]
-# Puszczenie mp3
+# Puszczenie mp3 [DONE]
 
 
 # Program:

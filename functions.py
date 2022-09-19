@@ -21,16 +21,31 @@ async def on_message(message):
     
     await message.channel.send(mess)
     
+# Called when someone changes their voice state (connects to vc)
 @client.event
 async def on_voice_state_update(member, before, after):
     
+    # ignore ourself
     if member == client.user:
         return
     
+    # If someone join channel (not change or deaf)
     if before.channel == None and after.channel != None:
-        guild = after.channel.guild
         print(member)
-        await guild.change_voice_state(channel=after.channel)
-        sleep(10)
-        await guild.change_voice_state(channel=None)
+        
+        guild = after.channel.guild # Get guild
+        await guild.change_voice_state(channel=after.channel) # Change voice state
+        voiceConnection = await after.channel.connect() # connect
+        
+        source = discord.FFmpegPCMAudio("test.mp3") # Get audio file
+        voiceConnection.play(source) # play it
+        
+        # Wait until bot is playing
+        while voiceConnection.is_playing():
+            sleep(1)
+            
+        await voiceConnection.disconnect() # disconnect
+
+
+
 
