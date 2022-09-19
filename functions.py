@@ -54,7 +54,10 @@ def DrawPerson(voiceChannel):
         availableUsers = {key:val for key, val in availableUsers.items() if val != member.id}
        
     # print(availableUsers)
-       
+    
+    if bool(availableUsers) == False:
+        return None
+    
     user = random.choice(list(availableUsers.keys()))
     return user
     
@@ -90,6 +93,11 @@ async def on_voice_state_update(member, before, after):
         
         # change nick and avatar
         drawedUser = DrawPerson(voiceChannel=after.channel)
+        if drawedUser == None:
+            isConnected = False
+            return
+        
+        
         await ChangeUsernameAndAvatar(guildID=guild.id, userID=users[drawedUser])
         sleep(5)
         
