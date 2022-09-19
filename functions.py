@@ -37,13 +37,14 @@ async def ChangeUsernameAndAvatar(guildID, userID=None):
         pfp = fp.read()
         # await client.user.edit(avatar=pfp)
      
-
 # Called when bot is ready 
 @client.event
 async def on_ready():
     # Debug info
     print('We have logged in as {0.user}'.format(client))
     
+    game = discord.Game("with your mom")
+    await client.change_presence(status=discord.Status.invisible, activity=game)
 
 
 # Draw random person that is not on voice channel
@@ -87,6 +88,7 @@ async def on_voice_state_update(member, before, after):
     if before.channel == None and after.channel != None:
         isConnected = True 
         
+        print('-'*80)
         print("{} joined channel".format(member))
         # Get guild
         guild = after.channel.guild # Get guild
@@ -96,7 +98,7 @@ async def on_voice_state_update(member, before, after):
         if drawedUser == None:
             isConnected = False
             return
-        
+        print("Drawed person: {}".format(drawedUser)) # debug
         
         await ChangeUsernameAndAvatar(guildID=guild.id, userID=users[drawedUser])
         sleep(5)
@@ -107,6 +109,7 @@ async def on_voice_state_update(member, before, after):
         
         # draw sentence
         sound = DrawSound(drawedUser)
+        print("Drawed sound: {}".format(sound)) # debug
         
         # play it
         source = discord.FFmpegPCMAudio(sound) # Get audio file
