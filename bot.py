@@ -9,7 +9,7 @@ from functions import *
 
 # Do przetestowania:
 
-# Wykrywanie, że ktoś dołączył na kanał głosowy
+# Wykrywanie, że ktoś dołączył na kanał głosowy [DONE]
 # Pobieranie nicku osoby + avataru(?), którą bot będzie imitować
 # Spróbować zmienić nick i avatar bota
 # Dołączenie na kanał głosowy

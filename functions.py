@@ -18,3 +18,8 @@ async def on_message(message):
     mess = unidecode(message.content)
     
     await message.channel.send(mess)
+    
+@client.event
+async def on_voice_state_update(member, before, after):
+    if before.channel == None and after.channel != None:
+        print(member)
