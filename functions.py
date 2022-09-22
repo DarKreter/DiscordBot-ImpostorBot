@@ -105,9 +105,9 @@ async def on_voice_state_update(member, before, after):
 
         r = random.randint(1, 10) 
         # print("Selected number: {}".format(r))
-        # if r != 10:
-        #     print("Decided not to join.")
-        #     return
+        if r != 10:
+            print("Decided not to join.")
+            return
         
         print("Let's have some fun, joining...")
 
