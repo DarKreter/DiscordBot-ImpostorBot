@@ -106,10 +106,10 @@ async def on_voice_state_update(member, before, after):
         print("{}:".format(now))
         print("{} joined channel '{}' in '{}'".format(member, after_channel, guild))
 
-        r = random.randint(1, 10) 
+        r = random.randint(1, 7) 
         # print("Selected number: {}".format(r))
-        if r != 10:
-            print("Decided not to join.")
+        if r != 3:
+            print("Decided not to join. ({})".format(r))
             return
         
         # random time to wait
