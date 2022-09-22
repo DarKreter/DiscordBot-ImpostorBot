@@ -83,39 +83,48 @@ isConnected = False
 @client.event
 async def on_voice_state_update(member, before, after):
     global isConnected
+
+    after_channel = after.channel
+
     # ignore ourself
     if member == client.user:
         return
     
     
     # If someone join channel (not change or deaf)
-    if before.channel == None and after.channel != None:
+    if before.channel == None and after_channel != None:
 
         if isConnected:
             print("I'm already connected...")
             return
         
         # Get guild
-        guild = after.channel.guild # Get guild
+        guild = after_channel.guild # Get guild
 
         now = datetime.datetime.now()
         print('-'*80)
         print("{}:".format(now))
-        print("{} joined channel '{}' in '{}'".format(member, after.channel, guild))
+        print("{} joined channel '{}' in '{}'".format(member, after_channel, guild))
 
         r = random.randint(1, 10) 
         # print("Selected number: {}".format(r))
-        if r != 10:
-            print("Decided not to join.")
-            return
+        # if r != 10:
+        #     print("Decided not to join.")
+        #     return
         
-        print("Let's have some fun, joining...")
+        # random time to wait
+        t = random.randint(10, 15)
+        print("I think I will do something, let's just wait {}s".format(t))
+        sleep(t)
+
+        print("Now let's have some fun, joining...")
 
         isConnected = True 
         
         # change nick and avatar
-        drawedUser = DrawPerson(voiceChannel=after.channel)
+        drawedUser = DrawPerson(voiceChannel=after_channel)
         if drawedUser == None:
+            print("Everybody I can imitate is taken, so I will just pass.")
             isConnected = False
             return
         print("I will imitate {}".format(drawedUser)) # debug
@@ -124,8 +133,8 @@ async def on_voice_state_update(member, before, after):
         sleep(5)
         
         # join
-        await guild.change_voice_state(channel=after.channel) # Change voice state
-        voiceConnection = await after.channel.connect() # connect
+        await guild.change_voice_state(channel=after_channel) # Change voice state
+        voiceConnection = await after_channel.connect() # connect
         
         # draw sentence
         sound = DrawSound(drawedUser)
