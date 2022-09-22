@@ -108,12 +108,12 @@ async def on_voice_state_update(member, before, after):
 
         r = random.randint(1, 10) 
         # print("Selected number: {}".format(r))
-        # if r != 10:
-        #     print("Decided not to join.")
-        #     return
+        if r != 10:
+            print("Decided not to join.")
+            return
         
         # random time to wait
-        t = random.randint(10, 15)
+        t = random.randint(30, 200)
         print("I think I will do something, let's just wait {}s".format(t))
         sleep(t)
 
