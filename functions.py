@@ -1,6 +1,6 @@
 import discord
 from unidecode import unidecode
-from time import sleep
+from asyncio import sleep
 from client import client
 from globalVar import *
 import random
@@ -107,15 +107,14 @@ async def on_voice_state_update(member, before, after):
         print("{} joined channel '{}' in '{}'".format(member, after_channel, guild))
 
         r = random.randint(1, 7) 
-        # print("Selected number: {}".format(r))
         if r != 3:
             print("Decided not to join. ({})".format(r))
             return
         
         # random time to wait
-        t = random.randint(30, 200)
+        t = random.randint(10, 200)
         print("I think I will do something, let's just wait {}s".format(t))
-        sleep(t)
+        await sleep(t)
 
         print("Now let's have some fun, joining...")
 
@@ -130,7 +129,7 @@ async def on_voice_state_update(member, before, after):
         print("I will imitate {}".format(drawedUser)) # debug
         
         await ChangeUsernameAndAvatar(guildID=guild.id, userID=users[drawedUser])
-        sleep(5)
+        await sleep(15)
         
         # join
         await guild.change_voice_state(channel=after_channel) # Change voice state
@@ -146,7 +145,7 @@ async def on_voice_state_update(member, before, after):
         
         # Wait until bot is playing
         while voiceConnection.is_playing():
-            sleep(1)
+            await sleep(1)
         
         await voiceConnection.disconnect() # disconnect
 
