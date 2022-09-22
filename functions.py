@@ -6,6 +6,7 @@ from globalVar import *
 import random
 from os import listdir
 from os.path import isfile, join
+import datetime
 
 async def ChangeUsernameAndAvatar(guildID, userID=None):
     guild = client.get_guild(guildID)
@@ -22,7 +23,7 @@ async def ChangeUsernameAndAvatar(guildID, userID=None):
         try:
             await client.user.edit(avatar=pfp)
         except discord.errors.HTTPException:
-            print("too fast avatar")
+            print("I've changed avatar too fast")
         
     else:
         # Change username based on userID, and guildID
@@ -41,7 +42,7 @@ async def ChangeUsernameAndAvatar(guildID, userID=None):
         try:
             await client.user.edit(avatar=pfp)
         except discord.errors.HTTPException:
-            print("too fast avatar")
+            print("I've changed avatar too fast")
      
 # Called when bot is ready 
 @client.event
@@ -86,31 +87,38 @@ async def on_voice_state_update(member, before, after):
     if member == client.user:
         return
     
-    if isConnected:
-        print("Already connected")
-        return
     
     # If someone join channel (not change or deaf)
     if before.channel == None and after.channel != None:
+
+        if isConnected:
+            print("I'm already connected...")
+            return
         
-        # r = random.randint(1, 10) 
-        # print("Selected number: {}".format(r))
-        # if r != 10:
-        #     return
-        
-        isConnected = True 
-        
-        print('-'*80)
-        print("{} joined channel".format(member))
         # Get guild
         guild = after.channel.guild # Get guild
+
+        now = datetime.datetime.now()
+        print('-'*80)
+        print("{}:".format(now))
+        print("{} joined channel '{}' in '{}'".format(member, after.channel, guild))
+
+        r = random.randint(1, 10) 
+        # print("Selected number: {}".format(r))
+        # if r != 10:
+        #     print("Decided not to join.")
+        #     return
+        
+        print("Let's have some fun, joining...")
+
+        isConnected = True 
         
         # change nick and avatar
         drawedUser = DrawPerson(voiceChannel=after.channel)
         if drawedUser == None:
             isConnected = False
             return
-        print("Drawed person: {}".format(drawedUser)) # debug
+        print("I will imitate {}".format(drawedUser)) # debug
         
         await ChangeUsernameAndAvatar(guildID=guild.id, userID=users[drawedUser])
         sleep(5)
@@ -121,7 +129,7 @@ async def on_voice_state_update(member, before, after):
         
         # draw sentence
         sound = DrawSound(drawedUser)
-        print("Drawed sound: {}".format(sound)) # debug
+        print("Playing {}...".format(sound)) # debug
         
         # play it
         source = discord.FFmpegPCMAudio(sound) # Get audio file
@@ -133,7 +141,7 @@ async def on_voice_state_update(member, before, after):
         
         await voiceConnection.disconnect() # disconnect
 
-
+        print("My job here is done, leaving...")
         # Change back to BOTan
         await ChangeUsernameAndAvatar(guildID=guild.id, userID=None)
         
