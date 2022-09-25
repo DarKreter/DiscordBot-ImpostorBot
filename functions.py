@@ -58,7 +58,9 @@ async def on_ready():
 def DrawPerson(voiceChannel):
     availableUsers = users
     
+    print("Personas on voice channel:")
     for member in voiceChannel.members:
+        print("\t{}".format(member))
         availableUsers = {key:val for key, val in availableUsers.items() if val != member.id}
        
     # print(availableUsers)
