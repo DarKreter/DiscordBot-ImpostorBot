@@ -100,6 +100,7 @@ async def on_voice_state_update(member, before, after):
             print("I'm already connected...")
             return
         
+        isConnected = True
         # Get guild
         guild = after_channel.guild # Get guild
 
