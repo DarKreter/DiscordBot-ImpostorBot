@@ -112,6 +112,7 @@ async def on_voice_state_update(member, before, after):
         r = random.randint(1, 7) 
         if r != 3:
             print("Decided not to join. ({})".format(r))
+            isConnected = False
             return
         
         # random time to wait
