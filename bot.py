@@ -5,7 +5,10 @@ from TOKEN import TOKEN
 from client import client
 from functions import *
 from globalVar import *
+import os
 
+# Lower priority
+os.nice(2)
 
 # Do przetestowania:
 
